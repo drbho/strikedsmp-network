@@ -1,273 +1,160 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mark3sCraft • Ultimate Protocol</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StrikeDSMP | Official Community Site</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        strike: {
+                            base: '#0f0f11', 
+                            card: '#161619', 
+                            primary: '#ff4500', 
+                            accent: '#ff6700', 
+                            text: '#e4e4e7', 
+                            muted: '#a1a1aa' 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        title: ['Rajdhani', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #00ff88;
-            --discord: #5865F2;
-            --bg: #020406;
-            --surface: rgba(15, 20, 30, 0.95);
-            --glow: 0 0 20px rgba(0, 255, 136, 0.3);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: crosshair; }
-        body { background: var(--bg); color: #fff; font-family: 'Fira Code', monospace; overflow-x: hidden; }
-
-        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-        /* --- LOGIN INITIAL --- */
-        #access-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; display: flex;
-            justify-content: center; align-items: center; transition: 1s;
-        }
-
-        /* --- LAYOUT --- */
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
         
-        .header-main { text-align: center; padding: 60px 0; }
-        .glitch { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; color: var(--primary); text-shadow: var(--glow); text-transform: uppercase; }
-
-        /* --- COUNTDOWN --- */
-        .countdown-bar {
-            background: rgba(0, 255, 136, 0.05);
-            border: 1px solid var(--primary);
-            padding: 20px; border-radius: 15px;
-            display: flex; justify-content: space-around;
-            margin-bottom: 40px; box-shadow: var(--glow);
-        }
-        .time-unit { text-align: center; }
-        .time-unit span { display: block; font-size: 2rem; font-weight: bold; color: var(--primary); }
-
-        /* --- TABS --- */
-        .nav-menu { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
-        .nav-btn {
-            background: #111; border: 1px solid #333; color: #fff;
-            padding: 12px 20px; border-radius: 5px; cursor: pointer; transition: 0.3s;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-        }
-        .nav-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(0,255,136,0.1); }
-        .nav-btn:hover { background: rgba(255,255,255,0.05); }
-
-        .tab-content { display: none; animation: fadeIn 0.5s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- FORMS & CARDS --- */
-        .glass-panel { background: var(--surface); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; }
-        
-        .member-card {
-            width: 280px; background: rgba(255,255,255,0.05);
-            border-radius: 15px; border: 1px solid #333; overflow: hidden;
-            transition: 0.3s; margin: 20px auto;
-        }
-        .member-img { height: 120px; background: #111; display: flex; align-items: center; justify-content: center; color: #333; }
-
-        input, textarea, select {
-            width: 100%; background: #000; border: 1px solid #222; color: var(--primary);
-            padding: 15px; margin-bottom: 15px; border-radius: 5px; font-family: inherit;
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(15, 15, 17, 0.7), rgba(15, 15, 17, 1)), 
+                              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
-        .btn-submit {
-            background: var(--primary); color: #000; border: none; padding: 15px;
-            font-weight: bold; width: 100%; cursor: pointer; border-radius: 5px; text-transform: uppercase;
-            transition: 0.3s;
+        .glow {
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
+            transition: all 0.3s ease;
         }
-        .btn-submit:hover { filter: brightness(1.2); box-shadow: var(--glow); }
-
-        .discord-box {
-            border: 1px solid var(--discord);
-            background: rgba(88, 101, 242, 0.05);
-            text-align: center;
+        .glow:hover {
+            box-shadow: 0 0 25px rgba(255, 103, 0, 0.6);
+            transform: scale(1.02);
         }
     </style>
 </head>
-<body>
+<body class="bg-strike-base text-strike-text font-sans antialiased">
 
-<div id="access-screen">
-    <div style="text-align: center;">
-        <h2 style="color: var(--primary); margin-bottom: 20px;">SISTEMA MARK3SCRAFT PROTETTO</h2>
-        <button class="btn-submit" onclick="initSystem()">INIZIALIZZA SEQUENZA</button>
-    </div>
-</div>
-
-<div id="main-ui" style="display: none;">
-    <div id="particles-js"></div>
-
-    <div class="container">
-        <header class="header-main">
-            <h1 class="glitch">MARK3SCRAFT</h1>
-            <p style="color: var(--primary); font-size: 0.7rem; letter-spacing: 5px;">HUB CENTRALE OPERATIVO</p>
-        </header>
-
-        <div class="countdown-bar">
-            <div class="time-unit"><span id="days">00</span>GIORNI</div>
-            <div class="time-unit"><span id="hours">00</span>ORE</div>
-            <div class="time-unit"><span id="mins">00</span>MINUTI</div>
-            <div class="time-unit"><span id="secs">00</span>SECONDI</div>
+    <nav class="bg-strike-card border-b border-white/5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="font-title text-3xl font-bold text-strike-primary tracking-wider">
+                STRIKE<span class="text-white">DSMP</span>
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-strike-muted hover:text-white transition-colors">Caratteristiche</a>
+                <a href="#stats" class="text-strike-muted hover:text-white transition-colors">Community</a>
+                <a href="https://discord.gg/TUO_INVITO" target="_blank" class="bg-strike-primary hover:bg-strike-accent text-white font-semibold px-5 py-2 rounded-lg transition-all shadow-lg shadow-strike-primary/20">
+                    Discord
+                </a>
+            </div>
         </div>
+    </nav>
 
-        <div class="nav-menu">
-            <button class="nav-btn active" onclick="tab('ruoli')">RUOLI SPECIALI</button>
-            <button class="nav-btn" onclick="tab('evento')">EVENTO</button>
-            <button class="nav-btn" onclick="tab('candidatura')">CANDIDATURE</button>
-            <button class="nav-btn" onclick="tab('unban')">UNBAN</button>
-            <a href="https://discord.gg/nctjB6cGgj" target="_blank" class="nav-btn" style="border-color: var(--discord); color: var(--discord);">
-                <i class="fab fa-discord"></i> DISCORD
+    <header class="hero-bg text-center py-32 px-6 animate-fade-in">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block bg-strike-primary/10 text-strike-primary font-semibold px-4 py-1 rounded-full text-xs mb-6 border border-strike-primary/20 uppercase tracking-widest">
+                Server in Crescita
+            </span>
+            <h1 class="font-title text-6xl md:text-8xl font-extrabold text-white leading-tight mb-8">
+                Unisciti alla <span class="text-strike-primary">Leggenda</span>.
+            </h1>
+            <p class="text-lg md:text-xl text-strike-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+                StrikeDSMP è una community nascente dedicata al Survival puro. 
+                Siamo 67 membri pronti a costruire, combattere e crescere insieme. Entra ora e diventa un fondatore!
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="https://discord.gg/TUO_INVITO" target="_blank" class="bg-strike-primary hover:bg-strike-accent text-white font-bold text-lg px-10 py-4 rounded-xl transition-all glow">
+                    Unisciti al Server
+                </a>
+                <a href="#features" class="bg-strike-card hover:bg-white/5 text-white font-semibold text-lg px-10 py-4 rounded-xl border border-white/10 transition-colors">
+                    Scopri di più
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="stats" class="bg-strike-card border-y border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-6">
+                <div class="font-title text-5xl font-bold text-strike-primary mb-2">67</div>
+                <div class="text-sm text-strike-muted font-semibold uppercase tracking-widest">Membri Fondatori</div>
+            </div>
+            <div class="p-6 border-y md:border-y-0 md:border-x border-white/5">
+                <div class="font-title text-5xl font-bold text-white mb-2">100%</div>
+                <div class="text-sm text-strike-muted font-semibold uppercase tracking-widest">Esperienza Vanilla</div>
+            </div>
+            <div class="p-6">
+                <div class="font-title text-5xl font-bold text-strike-accent mb-2">LIVE</div>
+                <div class="text-sm text-strike-muted font-semibold uppercase tracking-widest">Server Online</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="max-w-7xl mx-auto py-20 px-6">
+        <div class="text-center mb-12">
+            <h2 class="font-title text-4xl font-bold text-white mb-4">Perché giocare su Strike?</h2>
+            <p class="text-strike-muted">Piccola community, grandi ambizioni.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-strike-card p-8 rounded-2xl border border-white/5 hover:border-strike-primary/30 transition-all">
+                <div class="bg-strike-primary/10 text-strike-primary w-12 h-12 rounded-lg flex items-center justify-center mb-6 text-2xl">⚔️</div>
+                <h3 class="font-title text-2xl font-semibold text-white mb-3">Gameplay Equo</h3>
+                <p class="text-strike-muted text-sm leading-relaxed">Niente vantaggi a pagamento. La tua abilità e il tuo tempo sono le uniche cose che contano nello StrikeDSMP.</p>
+            </div>
+            <div class="bg-strike-card p-8 rounded-2xl border border-white/5 hover:border-strike-primary/30 transition-all">
+                <div class="bg-strike-primary/10 text-strike-primary w-12 h-12 rounded-lg flex items-center justify-center mb-6 text-2xl">🤝</div>
+                <h3 class="font-title text-2xl font-semibold text-white mb-3">Ambiente Sano</h3>
+                <p class="text-strike-muted text-sm leading-relaxed">Con 67 membri, ci conosciamo tutti. Lo staff è presente per garantire un clima di rispetto e divertimento.</p>
+            </div>
+            <div class="bg-strike-card p-8 rounded-2xl border border-white/5 hover:border-strike-primary/30 transition-all">
+                <div class="bg-strike-primary/10 text-strike-primary w-12 h-12 rounded-lg flex items-center justify-center mb-6 text-2xl">🤖</div>
+                <h3 class="font-title text-2xl font-semibold text-white mb-3">Bot Professionale</h3>
+                <p class="text-strike-muted text-sm leading-relaxed">Gestiamo ogni richiesta tramite il nostro bot dedicato per ticket e segnalazioni, assicurando risposte rapide.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-strike-primary py-16 px-6 text-center">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="font-title text-4xl font-bold text-white mb-4">Non restare a guardare</h2>
+            <p class="text-lg text-white/90 mb-8">Entra a far parte della storia di StrikeDSMP fin dai primi passi.</p>
+            <a href="https://discord.gg/TUO_INVITO" target="_blank" class="inline-block bg-white text-strike-primary font-bold text-lg px-12 py-4 rounded-xl transition-all hover:scale-105">
+                Entra nel Discord
             </a>
         </div>
+    </section>
 
-        <div id="ruoli" class="tab-content active">
-            <div class="glass-panel">
-                <div style="display: grid; grid-template-columns: 1fr 300px; gap: 30px;">
-                    <form onsubmit="sendDiscord(event, 'RUOLO')">
-                        <h3>Richiedi Ruolo Speciale</h3>
-                        <input type="text" id="r-user" placeholder="Nickname Discord" required oninput="preview()">
-                        <input type="text" id="r-name" placeholder="Nome Ruolo" required oninput="preview()">
-                        <textarea id="r-note" placeholder="Perché vuoi questo ruolo?" oninput="preview()"></textarea>
-                        <button class="btn-submit">INVIA RICHIESTA</button>
-                    </form>
-                    <div class="member-card">
-                        <div class="member-img"><i class="fas fa-user-shield fa-4x"></i></div>
-                        <div style="padding: 15px; text-align: center;">
-                            <h4 id="p-user" style="color: var(--primary);">User</h4>
-                            <p id="p-role" style="font-size: 0.7rem; color: #888;">RUOLO</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <footer class="bg-strike-base border-t border-white/5 py-8 px-6 text-center">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-strike-muted/50 text-xs uppercase tracking-widest">© 2024 StrikeDSMP • Community di 67 sopravvissuti</p>
         </div>
-
-        <div id="evento" class="tab-content">
-            <div class="glass-panel">
-                <h3>Partecipazione Evento</h3>
-                <p style="margin-bottom: 20px; color: #888;">Conferma la tua presenza per l'evento del 28 Febbraio.</p>
-                <form onsubmit="sendDiscord(event, 'EVENTO')">
-                    <input type="text" id="e-user" placeholder="Nickname Discord" required>
-                    <select id="e-kit">
-                        <option>Kit Guerriero</option>
-                        <option>Kit Arciere</option>
-                        <option>Kit Mago</option>
-                    </select>
-                    <button class="btn-submit">CONFERMA PARTECIPAZIONE</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="candidatura" class="tab-content">
-            <div class="glass-panel">
-                <h3>Candidatura Staff</h3>
-                <form onsubmit="sendDiscord(event, 'CANDIDATURA')">
-                    <input type="text" id="c-user" placeholder="Nickname" required>
-                    <input type="number" id="c-age" placeholder="Età">
-                    <textarea id="c-exp" placeholder="Esperienze passate..."></textarea>
-                    <button class="btn-submit">INVIA CV</button>
-                </form>
-            </div>
-        </div>
-
-        <div id="unban" class="tab-content">
-            <div class="glass-panel">
-                <h3>Richiesta Unban</h3>
-                <form onsubmit="sendDiscord(event, 'UNBAN')">
-                    <input type="text" id="u-user" placeholder="Nickname" required>
-                    <textarea id="u-reason" placeholder="Perché dovremmo sbannarti?"></textarea>
-                    <button class="btn-submit" style="background: #ff4444;">INVIA RICHIESTA</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="glass-panel discord-box">
-            <h3 style="color: var(--discord); margin-bottom: 10px;"><i class="fab fa-discord"></i> UNISCITI AL NOSTRO DISCORD</h3>
-            <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 20px;">Rimani aggiornato su tutte le novità del server Mark3sCraft.</p>
-            <a href="https://discord.gg/nctjB6cGgj" target="_blank" class="btn-submit" style="background: var(--discord); color: white; text-decoration: none; display: inline-block; width: auto; padding: 12px 40px;">ENTRA ORA</a>
-        </div>
-
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    function initSystem() {
-        document.getElementById('access-screen').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('access-screen').style.display = 'none';
-            document.getElementById('main-ui').style.display = 'block';
-            particlesJS('particles-js', { 
-                particles: { 
-                    number: { value: 50 }, 
-                    color: { value: '#00ff88' }, 
-                    line_linked: { opacity: 0.1 },
-                    move: { speed: 2 }
-                } 
-            });
-        }, 1000);
-    }
-
-    function tab(id) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-
-    function preview() {
-        document.getElementById('p-user').innerText = document.getElementById('r-user').value || "User";
-        document.getElementById('p-role').innerText = document.getElementById('r-name').value.toUpperCase() || "RUOLO";
-    }
-
-    // Countdown 28 Febbraio 2026
-    const target = new Date("Feb 28, 2026 00:00:00").getTime();
-    setInterval(() => {
-        const now = new Date().getTime();
-        const d = target - now;
-        document.getElementById('days').innerText = Math.max(0, Math.floor(d / (86400000)));
-        document.getElementById('hours').innerText = Math.max(0, Math.floor((d % 86400000) / 3600000));
-        document.getElementById('mins').innerText = Math.max(0, Math.floor((d % 3600000) / 60000));
-        document.getElementById('secs').innerText = Math.max(0, Math.floor((d % 60000) / 1000));
-    }, 1000);
-
-    async function sendDiscord(e, type) {
-        e.preventDefault();
-        const webhook = "https://discord.com/api/webhooks/1454900456898957589/lSC_cPEStvtVw6yo7sLcGLPaYGUIBXiqahxP0-aggQFrttXU4KbfuIwvQ2CgfeHraEeK";
-        
-        let embed = { title: `PROTOCOLLO: ${type}`, timestamp: new Date(), color: 65280 };
-
-        if(type === 'RUOLO') {
-            embed.description = `**Utente:** ${document.getElementById('r-user').value}\n**Ruolo:** ${document.getElementById('r-name').value}\n**Note:** ${document.getElementById('r-note').value}`;
-            embed.color = 65280; 
-        } else if(type === 'EVENTO') {
-            embed.description = `**Partecipante:** ${document.getElementById('e-user').value}\n**Classe:** ${document.getElementById('e-kit').value}`;
-            embed.color = 3447003; 
-        } else if(type === 'UNBAN') {
-            embed.description = `**Utente:** ${document.getElementById('u-user').value}\n**Motivo:** ${document.getElementById('u-reason').value}`;
-            embed.color = 15158332; 
-        } else if(type === 'CANDIDATURA') {
-            embed.description = `**Candidato:** ${document.getElementById('c-user').value}\n**Età:** ${document.getElementById('c-age').value}\n**Esperienza:** ${document.getElementById('c-exp').value}`;
-            embed.color = 16776960; 
-        }
-
-        try {
-            await fetch(webhook, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ embeds: [embed] })
-            });
-            alert("TRASMESSA AL DATABASE CON SUCCESSO!");
-            e.target.reset();
-            if(type === 'RUOLO') preview();
-        } catch (err) {
-            alert("ERRORE DI TRASMISSIONE. Riprova più tardi.");
-        }
-    }
-</script>
+    </footer>
 
 </body>
 </html>
